@@ -1,48 +1,68 @@
 import random
 
+# Introduction to game and gameplay
 
-# oyun tanıtımı ve oynanış
+def rock_paper_scissors_EMRE_YAVUZ():
+    print("Welcome to Rock Paper Scissors Game!")
+    print("Rules:"
+          "Rock crushes Scissors."
+          "Scissors cuts Paper."
+          "Paper covers Rock.")
+    print("Who wins first two rounds will be the game winner.")
+    print("If you want to quit press q.\n")
 
-def rock_paper_scissors():
     choice = ["rock", "paper", "scissors"]
-    your_score = 0
-    opponent_score = 0
 
-    # Oyunun ana döngüsü
+    while True:
+        your_score = 0
+        opponent_score = 0
 
-    while your_score < 2 and opponent_score < 2:
-        you = input("rock, paper, scissors? ").lower()
-        opponent_choice = random.choice(choice)
-        print(f"Opponent choice: {opponent_choice}")
+        # Main loop of the game
+        while your_score < 2 and opponent_score < 2:
+            you = input("rock, paper, scissors? ").lower()
 
-        if you == opponent_choice:
-            print("Draw!")
-        elif (you == "rock" and opponent_choice == "scissors") or \
-                (you == "paper" and opponent_choice == "rock") or \
-                (you == "scissors" and opponent_choice == "paper"):
+            if you == 'q':
+                print("Quitting game!")
+                return
 
-            # tur döngüsü, kazanan +1 puan alıyor
+            if you not in choice:
+                print("Invalid choice. Please try again.")
+                continue
 
-            print("You WIN!")
-            your_score += 1
+            opponent_choice = random.choice(choice)
+            print(f"Opponent choice: {opponent_choice}")
+
+            if you == opponent_choice:
+                print("Draw!")
+            elif (you == "rock" and opponent_choice == "scissors") or \
+                    (you == "paper" and opponent_choice == "rock") or \
+                    (you == "scissors" and opponent_choice == "paper"):
+
+                # Win round = +1 point
+                print("You WIN!")
+                your_score += 1
+            else:
+                print("Opponent WINS!")
+                opponent_score += 1
+
+            print(f"Score: You {your_score} - Opponent {opponent_score}")
+
+        # Picking game winner
+        if your_score == 2:
+            print("Congrats, You Win the game!")
         else:
-            print("Opponent WIN!")
-            opponent_score += 1
+            print("Sorry, Opponent Wins the game!")
 
-        print(f"Skor: You {your_score} - Opponent {opponent_score}")
+        # Play again
+        play_again = input("Do you want to play again? (yes/no) ").lower()
+        if play_again != "yes":
+            print("Thanks for playing!")
+            break
 
-    # oyun galibini belirleme
+        opponent_play_again = random.choice(["yes", "no"])
+        print(f"Opponent: {opponent_play_again}")
+        if opponent_play_again != "yes":
+            print("Opponent quit. Thanks for playing!")
+            break
 
-    if your_score == 2:
-        print("Congrats, You Win the game!")
-    else:
-        print("Sorry, Opponent Win the game!")
-
-    # tekrar oyna
-
-    play_again = input("Do you want to play again? (yes/no) ").lower()
-    if play_again == "yes":
-        rock_paper_scissors()
-
-
-rock_paper_scissors()
+rock_paper_scissors_EMRE_YAVUZ()
